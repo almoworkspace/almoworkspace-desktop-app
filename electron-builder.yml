@@ -1,0 +1,4 @@
+appId: com.aw.app
+publish:
+  provider: github
+  token: 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
