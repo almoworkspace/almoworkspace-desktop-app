@@ -64,7 +64,7 @@ const Login = () => {
                         <Option value="es">Español</Option>
                         <Option value="en">English</Option>
                     </Select>
-                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021</Text>
+                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.0.0</Text>
                 </Row>
             </Col>
         </Row>
