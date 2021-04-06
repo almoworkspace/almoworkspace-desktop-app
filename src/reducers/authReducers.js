@@ -1,0 +1,50 @@
+import { AUTH_TYPES } from '../actions/types';
+
+const initialState = {
+    user: null,
+    token: null,
+    isLogged: false,
+    isLoading: false,
+    isAdmin: false
+}
+
+export default function (state = initialState, action) {
+    switch (action.type) {
+        case AUTH_TYPES.LOGIN_REQUEST:
+            return {
+                ...state,
+                isLogged: false,
+                isLoading: true,
+                user: null
+            };
+        case AUTH_TYPES.LOGIN_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                isLogged: true,
+                token: action.payload.token,
+                user: action.payload.user
+            };
+        case AUTH_TYPES.LOGIN_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                isLogged: false,
+                user: null
+            };
+        case AUTH_TYPES.LOGOUT_REQUEST:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case AUTH_TYPES.LOGOUT_SUCCESS:
+            return {};
+        case AUTH_TYPES.LOGOUT_FAILURE:
+            return {
+                ...state,
+                isLoading: false
+            };
+        default:
+            return state;
+    }
+}
