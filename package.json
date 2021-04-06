@@ -1,23 +1,16 @@
 {
-  "name": "almo-workspace",
+  "name": "almoworkspace-desktop-app",
   "version": "0.1.0",
   "description": "Almo Workspace App",
   "productName": "Almo Workspace",
   "author": "Arcángel Soluciones",
   "private": true,
   "main": "public/electron.js",
-  "homepage": "./",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/almoworkspace/almoworkspace-desktop-app.git"
-  },
+  "homepage": "./",  
   "build": {
     "appId": "com.aw.app",
     "win": {
       "icon": "public/assets/images/icon.png"
-    },
-    "publish": {
-      "provider": "github"
     },
     "files": [
       "./build/**/*",
@@ -27,7 +20,14 @@
     ],
     "directories": {
       "buildResources": "assets"
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "almoworkspace",
+        "repo": "almoworkspace-desktop-app"       
+      }
+    ]
   },
   "dependencies": {
     "@craco/craco": "^6.1.1",
@@ -65,7 +65,7 @@
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "deploy": "electron-builder --publish always"
+    "deploy": "SET GH_TOKEN=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 && electron-builder --publish always"
   },
   "eslintConfig": {
     "extends": [
