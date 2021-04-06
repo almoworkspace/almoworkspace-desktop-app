@@ -7,10 +7,17 @@
   "private": true,
   "main": "public/electron.js",
   "homepage": "./",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almoworkspace/almoworkspace-desktop-app.git"
+  },
   "build": {
     "appId": "com.aw.app",
     "win": {
       "icon": "public/assets/images/icon.png"
+    },
+    "publish": {
+      "provider": "github"
     },
     "files": [
       "./build/**/*",
@@ -21,10 +28,6 @@
     "directories": {
       "buildResources": "assets"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/almoworkspace/almoworkspace-desktop-app.git"
   },
   "dependencies": {
     "@craco/craco": "^6.1.1",
