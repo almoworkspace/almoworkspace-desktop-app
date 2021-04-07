@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Almo Workspace App",
   "productName": "Almo Workspace",
-  "author": "Arcángel Soluciones",
-  "private": true,
+  "author": "Arcángel Soluciones",  
   "main": "public/electron.js",
   "homepage": "./",  
   "build": {
