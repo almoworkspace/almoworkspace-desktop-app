@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom';
-import { UserOutlined, MessageOutlined, FilePdfOutlined } from '@ant-design/icons';
+import { UserOutlined, MessageOutlined, FilePdfOutlined, FormOutlined, ToolOutlined } from '@ant-design/icons';
 
 const Sidebar = () => {
     const rol = useSelector(state => state.auth.user.role);
@@ -14,7 +14,7 @@ const Sidebar = () => {
     return (
         <Sider width={200} className="site-layout-background" style={{ borderRight: '0.5px solid rgb(235, 237, 240)' }}>
             <Menu
-                mode="inline"               
+                mode="inline"
                 style={{ height: '100%' }}>
                 {
                     rol === 'ADMIN' ?
@@ -25,16 +25,28 @@ const Sidebar = () => {
                                         {t("app.ME05")}
                                     </Link>
                                 </Menu.Item>
+                                <Menu.Item key="2" icon={<ToolOutlined />}>
+                                    <Link to={'/dashboard/tools'}>
+                                        {t("app.ME64")}
+                                    </Link>
+                                </Menu.Item>
                             </Menu.ItemGroup>
-                            <Menu.ItemGroup key="g2" title={t("app.ME07")}>
-                                <Menu.Item key="2" icon={<FilePdfOutlined />}>
+                            <Menu.ItemGroup key="g2" title={t("app.ME06")}>
+                                <Menu.Item key="3" icon={<FormOutlined />}>
+                                    <Link to={'/dashboard/forms'}>
+                                        {t("app.ME06")}
+                                    </Link>
+                                </Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g3" title={t("app.ME07")}>
+                                <Menu.Item key="4" icon={<FilePdfOutlined />}>
                                     <Link to={'/dashboard/orders'}>
                                         {t("app.ME08")}
                                     </Link>
                                 </Menu.Item>
                             </Menu.ItemGroup>
-                            <Menu.ItemGroup key="g3" title={t("app.ME09")}>
-                                <Menu.Item key="3" icon={<MessageOutlined />}>
+                            <Menu.ItemGroup key="g4" title={t("app.ME09")}>
+                                <Menu.Item key="5" icon={<MessageOutlined />}>
                                     <Link to={'/dashboard/chat'}>
                                         {t("app.ME10")}
                                     </Link>

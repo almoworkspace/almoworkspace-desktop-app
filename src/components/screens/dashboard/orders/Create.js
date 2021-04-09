@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Breadcrumb, Row, Col, Layout, Card, Input, Button, Modal, notification, Spin, Space, Typography, DatePicker, TimePicker, Upload } from 'antd';
+import { Breadcrumb, Row, Col, Layout, Card, Input, Button, Select, notification, Spin, Space, Typography, DatePicker, TimePicker, Upload } from 'antd';
 import { LoadingOutlined, UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import { CreateOrder, UploadFile } from '../../../../helpers/apis/Order';
+import { FindAll } from '../../../../helpers/apis/Tool';
 import MessageHandler from '../../../component/MessageHandler';
 
 const Create = () => {
     const token = useSelector(state => state.auth.token);
     const history = useHistory();
     const { t } = useTranslation();
-    const [code, setCode] = useState('');
-    const [version, setVersion] = useState('');
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
     const [answerDate, setAnswerDate] = useState('');
-    const [otNumber, setOtNumber] = useState('');
     const [quotationNumber, setQuotationNumber] = useState('');
     const [clientName, setClientName] = useState('');
     const [setupDatetime, setSetupDatetime] = useState('');
@@ -42,10 +40,21 @@ const Create = () => {
     const [techSignaturePicture, setTechSignaturePicture] = useState(null);
     const [clientAproveDatetime, setClientAproveDatetime] = useState('');
     const [clientSignaturePicture, setClientSignaturePicture] = useState(null);
+    const [tools, setTools] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const { TextArea } = Input;
-    const { Title, Text } = Typography;
+    const { Title } = Typography;
+    const { Option } = Select;
+
+    useEffect(() => {
+        (async () => {
+            const response = await FindAll(token);
+            if (response.statusCode === 200) {
+                setTools(response.data);
+            }
+        })();
+    }, [])
 
     const openNotificationWithIcon = type => {
         notification[type]({
@@ -56,53 +65,43 @@ const Create = () => {
     };
 
     const create = async () => {
-        if (version === '' || code === '') {
-            Modal.info({
-                title: 'Mensaje del sistema',
-                content: t('code.CO01')
-            });
-        } else {            
-            const obj = {
-                code: code,
-                version: version,
-                name: name,
-                lastname: lastname,
-                answerDate: answerDate,
-                otNumber: otNumber,
-                quotationNumber: quotationNumber,
-                clientName: clientName,
-                setupDatetime: setupDatetime,
-                setupAddress: setupAddress,
-                email: email,
-                hasWorks: hasWorks,
-                taskObsOne: taskObsOne,
-                startTime: startTime,
-                endTime: endTime,
-                truckDeliverTime: truckDeliverTime,
-                taskObsTwo: taskObsTwo,
-                materialsTruckOne: materialsTruckOne,
-                materialsTruckTwo: materialsTruckTwo,
-                materialsTruckThree: materialsTruckThree,
-                materialsTruckFour: materialsTruckFour,
-                materialsConclusions: materialsConclusions,
-                materialsObs: materialsObs,
-                generalObs: generalObs,
-                generalPictures: generalPictures === null ? '' : generalPictures,
-                techName: techName,
-                techDatetime: techDatetime,
-                techSignaturePicture: techSignaturePicture === null ? '' : techSignaturePicture.path,
-                clientAproveDatetime: clientAproveDatetime,
-                clientSignaturePicture: clientSignaturePicture === null ? '' : clientSignaturePicture.path
-            };
-            setIsLoading(true);
-            const response = await CreateOrder(token, obj);
-            if (response.statusCode === 200) {
-                openNotificationWithIcon('success');
-                history.push('/dashboard/orders');
-            } else {
-                setIsLoading(false);
-                MessageHandler(response.message);
-            }
+        const obj = {
+            name: name,
+            lastname: lastname,
+            answerDate: answerDate,
+            quotationNumber: quotationNumber,
+            clientName: clientName,
+            setupDatetime: setupDatetime,
+            setupAddress: setupAddress,
+            email: email,
+            hasWorks: hasWorks,
+            taskObsOne: taskObsOne,
+            startTime: startTime,
+            endTime: endTime,
+            truckDeliverTime: truckDeliverTime,
+            taskObsTwo: taskObsTwo,
+            materialsTruckOne: materialsTruckOne,
+            materialsTruckTwo: materialsTruckTwo,
+            materialsTruckThree: materialsTruckThree,
+            materialsTruckFour: materialsTruckFour,
+            materialsConclusions: materialsConclusions,
+            materialsObs: materialsObs,
+            generalObs: generalObs,
+            generalPictures: generalPictures === null ? '' : generalPictures,
+            techName: techName,
+            techDatetime: techDatetime,
+            techSignaturePicture: techSignaturePicture === null ? '' : techSignaturePicture.path,
+            clientAproveDatetime: clientAproveDatetime,
+            clientSignaturePicture: clientSignaturePicture === null ? '' : clientSignaturePicture.path
+        };
+        setIsLoading(true);
+        const response = await CreateOrder(token, obj);
+        if (response.statusCode === 200) {
+            openNotificationWithIcon('success');
+            history.push('/dashboard/orders');
+        } else {
+            setIsLoading(false);
+            MessageHandler(response.message);
         }
     }
 
@@ -174,12 +173,6 @@ const Create = () => {
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setCode(e.target.value) }} placeholder={t('app.ME34')} />
-                                </Space>
-                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setVersion(e.target.value) }} placeholder={t('app.ME35')} />
-                                </Space>
-                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <Input onChange={(e) => { setLastname(e.target.value) }} placeholder={t('app.ME36')} />
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
@@ -199,9 +192,6 @@ const Create = () => {
                         </Row>
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
-                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setOtNumber(e.target.value) }} placeholder={t('app.ME39')} />
-                                </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <Input onChange={(e) => { setQuotationNumber(e.target.value) }} placeholder={t('app.ME40')} />
                                 </Space>
@@ -258,16 +248,116 @@ const Create = () => {
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setMaterialsTruckOne(e.target.value) }} placeholder={t('app.ME47')} />
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder={t('app.ME47')}
+                                        onChange={
+                                            (value) => {
+                                                if (tools.length < 1) {
+                                                    setMaterialsTruckOne(value);
+                                                } else {
+                                                    let temp = `${materialsTruckOne},${value}`;
+                                                    setMaterialsTruckOne(temp);
+                                                }
+                                            }
+                                        }>
+                                        {
+                                            tools.length <= 0 ?
+                                                <></>
+                                                :
+                                                tools.map((item, index) => {
+                                                    return (
+                                                        <Option key={index} value={item.descrip}>{item.descrip}</Option>
+                                                    )
+                                                })
+                                        }
+                                    </Select>
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setMaterialsTruckTwo(e.target.value) }} placeholder={t('app.ME48')} />
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder={t('app.ME48')}
+                                        onChange={
+                                            (value) => {
+                                                if (tools.length < 1) {
+                                                    setMaterialsTruckTwo(value);
+                                                } else {
+                                                    let temp = `${materialsTruckTwo},${value}`;
+                                                    setMaterialsTruckTwo(temp);
+                                                }
+                                            }
+                                        }>
+                                        {
+                                            tools.length <= 0 ?
+                                                <></>
+                                                :
+                                                tools.map((item, index) => {
+                                                    return (
+                                                        <Option key={index} value={item.descrip}>{item.descrip}</Option>
+                                                    )
+                                                })
+                                        }
+                                    </Select>
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setMaterialsTruckThree(e.target.value) }} placeholder={t('app.ME49')} />
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder={t('app.ME49')}
+                                        onChange={
+                                            (value) => {
+                                                if (tools.length < 1) {
+                                                    setMaterialsTruckThree(value);
+                                                } else {
+                                                    let temp = `${materialsTruckThree},${value}`;
+                                                    setMaterialsTruckThree(temp);
+                                                }
+                                            }
+                                        }>
+                                        {
+                                            tools.length <= 0 ?
+                                                <></>
+                                                :
+                                                tools.map((item, index) => {
+                                                    return (
+                                                        <Option key={index} value={item.descrip}>{item.descrip}</Option>
+                                                    )
+                                                })
+                                        }
+                                    </Select>
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setMaterialsTruckFour(e.target.value) }} placeholder={t('app.ME50')} />
+                                    <Select
+                                        mode="multiple"
+                                        allowClear
+                                        style={{ width: '100%' }}
+                                        placeholder={t('app.ME50')}
+                                        onChange={
+                                            (value) => {
+                                                if (tools.length < 1) {
+                                                    setMaterialsTruckFour(value);
+                                                } else {
+                                                    let temp = `${materialsTruckFour},${value}`;
+                                                    setMaterialsTruckFour(temp);
+                                                }
+                                            }
+                                        }>
+                                        {
+                                            tools.length <= 0 ?
+                                                <></>
+                                                :
+                                                tools.map((item, index) => {
+                                                    return (
+                                                        <Option key={index} value={item.descrip}>{item.descrip}</Option>
+                                                    )
+                                                })
+                                        }
+                                    </Select>
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <TextArea rows={3} onChange={(e) => { setMaterialsConclusion(e.target.value) }} placeholder={t('app.ME51')} />

@@ -34,6 +34,13 @@
     "code.CO33": "Mensaje registrado exitosamente",
     "code.CO34": "Mensajes no encontrados",
     "code.CO35": "Mensajes listados correctamente",
+    "code.CO36": "Herramienta ya registrada",
+    "code.CO37": "Error registrando herramienta",
+    "code.CO38": "Herramienta registrada exitosamente",
+    "code.CO39": "Herramientas no encontradas",
+    "code.CO40": "Herramientas listadas correctamente",
+    "code.CO41": "Herramienta actualizada exitosamente",
+    "code.CO42": "Error actualizando herramienta",
     "app.ME01": "Usuario",
     "app.ME02": "Contraseña",
     "app.ME03": "Acceder",
@@ -95,5 +102,10 @@
     "app.ME59": "PDF generado exitosamente",
     "app.ME60": "Descargar",
     "app.ME61": "Limpiar",
-    "app.ME62": "Enviar"
+    "app.ME62": "Enviar",
+    "app.ME63": "Política de privacidad",
+    "app.ME64": "Herramientas",
+    "app.ME65": "Descripción",
+    "app.ME66": "Nueva herramienta",
+    "app.ME67": "Modificar herramienta"
 }

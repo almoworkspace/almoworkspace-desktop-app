@@ -34,6 +34,13 @@
     "code.CO33": "Successfully registered message",
     "code.CO34": "Messages not found",
     "code.CO35": "Correctly listed messages",
+    "code.CO36": "Tool already registered",
+    "code.CO37": "Error registering tool",
+    "code.CO38": "Successfully registered tool",
+    "code.CO39": "Tools not found",
+    "code.CO40": "Tools successfully found",
+    "code.CO41": "Tool updated successfully",
+    "code.CO42": "Error updating tool",
     "app.ME01": "Username",
     "app.ME02": "Password",
     "app.ME03": "Log in",
@@ -95,5 +102,10 @@
     "app.ME59": "Successfully generated PDF",
     "app.ME60": "Download",
     "app.ME61": "Clean",
-    "app.ME62": "Send"
+    "app.ME62": "Send",
+    "app.ME63": "Privacy policy",
+    "app.ME64": "Tools",
+    "app.ME65": "Description",
+    "app.ME66": "New tool",
+    "app.ME67": "Update tool"
 }

@@ -1,6 +1,6 @@
 {
   "name": "almoworkspace-desktop-app",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Almo Workspace App",
   "productName": "Almo Workspace",
   "author": "Arcángel Soluciones",  
@@ -64,7 +64,7 @@
     "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "deploy": "SET GH_TOKEN=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 && electron-builder --publish always"
+    "deploy": "SET GH_TOKEN=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 && electron-builder --publish always"
   },
   "eslintConfig": {
     "extends": [

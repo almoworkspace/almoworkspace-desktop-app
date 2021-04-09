@@ -1,22 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Typography, Input, Button, Space, Modal, Select, Spin } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone, LoadingOutlined } from '@ant-design/icons';
-import { Login as LoginAction } from '../../../actions/authActions';
+import { Login as LoginAction, CleanUp } from '../../../actions/authActions';
 import logo from '../../../assets/images/Logo-ALMO-PNG-Transparente.png';
 
 const Login = () => {
     const dispatch = useDispatch();
     const isLoading = useSelector(state => state.auth.isLoading);
     const { t, i18n } = useTranslation();
-    const { Title, Text } = Typography;
+    const { Text } = Typography;
     const { Option } = Select;
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const [user, setUser] = useState('');
     const [pass, setPass] = useState('');
     const [goTo, setGoTo] = useState(false);
+
+    useEffect(() => {
+        dispatch(CleanUp());
+    }, [])
 
     const signIn = () => {
         if (user === '' || pass === '') {
@@ -47,7 +51,7 @@ const Login = () => {
                 <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', height: '80vh' }}>
                     <Col span={12}>
                         <Space direction='vertical'>
-                            <img src={logo} style={{ height: 150, width: 250, alignSelf: 'center' }} />                            
+                            <img src={logo} style={{ height: 150, width: 250, alignSelf: 'center' }} />
                             <Input onPressEnter={signIn} onChange={(e) => { setUser(e.target.value) }} style={{ marginTop: 20 }} prefix={<UserOutlined />} placeholder={t('app.ME01')} />
                             <Input.Password onPressEnter={signIn} onChange={(e) => { setPass(e.target.value) }} placeholder={t('app.ME02')} iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} />
                             {isLoading ?
@@ -64,7 +68,8 @@ const Login = () => {
                         <Option value="es">Español</Option>
                         <Option value="en">English</Option>
                     </Select>
-                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.0.2</Text>
+                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.0.4</Text>
+                    <Link to="/auth/policy"><Button type="text"><Text strong>{t("app.ME63")}</Text></Button></Link>
                 </Row>
             </Col>
         </Row>

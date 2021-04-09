@@ -6,13 +6,14 @@ import { ReadUsers, CreateUser, UpdateUser } from './views/Users';
 import { ReadOrders, CreateOrders } from './views/Orders';
 import { ReadNotifications } from './views/Notification';
 import { ReadChat } from './views/Chat';
+import { ReadTools, CreateTools, UpdateTools } from './views/Tool';
 
 const DashboardRouter = ({ match: { url } }) => {
     const rol = useSelector(state => state.auth.user.role);
 
     if (rol === 'ADMIN') {
         return (
-            <Switch>
+            <Switch>                
                 <Route path={`${url}`} exact component={ReadDashboard} />
                 <Route path={`${url}/users`} exact component={ReadUsers} />
                 <Route path={`${url}/users/create`} exact component={CreateUser} />
@@ -21,13 +22,16 @@ const DashboardRouter = ({ match: { url } }) => {
                 <Route path={`${url}/orders/create`} exact component={CreateOrders} />
                 <Route path={`${url}/notifications`} exact component={ReadNotifications} />
                 <Route path={`${url}/chat`} exact component={ReadChat} />
+                <Route path={`${url}/tools`} exact component={ReadTools} />
+                <Route path={`${url}/tools/create`} exact component={CreateTools} />
+                <Route path={`${url}/tools/:id`} exact component={UpdateTools} />
                 <Redirect to="/dashboard" />
             </Switch>
         );
     } else {
         return (
-            <Switch>
-                <Route path={`${url}`} exact component={ReadDashboard} />            
+            <Switch>               
+                <Route path={`${url}`} exact component={ReadDashboard} />
                 <Route path={`${url}/orders`} exact component={ReadOrders} />
                 <Route path={`${url}/orders/create`} exact component={CreateOrders} />
                 <Route path={`${url}/notifications`} exact component={ReadNotifications} />
