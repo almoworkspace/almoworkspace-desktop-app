@@ -38,3 +38,7 @@ export const Logout = (token) => async dispatch => {
         });
     }
 }
+
+export const CleanUp = () => async dispatch => {
+    dispatch({ type: AUTH_TYPES.CLEANUP })
+}

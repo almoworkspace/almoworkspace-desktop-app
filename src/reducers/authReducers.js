@@ -39,6 +39,15 @@ export default function (state = initialState, action) {
             };
         case AUTH_TYPES.LOGOUT_SUCCESS:
             return {};
+        case AUTH_TYPES.CLEANUP:
+            state.user = null;
+            state.token = null;
+            state.isLoading = false;
+            state.isLogged = false;
+            state.isAdmin = false;
+            return {
+                ...state
+            };
         case AUTH_TYPES.LOGOUT_FAILURE:
             return {
                 ...state,
