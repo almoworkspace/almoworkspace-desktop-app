@@ -41,6 +41,8 @@
     "code.CO40": "Tools successfully found",
     "code.CO41": "Tool updated successfully",
     "code.CO42": "Error updating tool",
+    "code.CO43": "Form successfully registered",
+    "code.CO44": "Form updated successfully",
     "app.ME01": "Username",
     "app.ME02": "Password",
     "app.ME03": "Log in",
@@ -107,5 +109,18 @@
     "app.ME64": "Tools",
     "app.ME65": "Description",
     "app.ME66": "New tool",
-    "app.ME67": "Update tool"
+    "app.ME67": "Update tool",
+    "app.ME68": "New form",
+    "app.ME69": "Update form",
+    "app.ME70": "Field description",
+    "app.ME71": "Text and numbers",
+    "app.ME72": "Date",
+    "app.ME73": "Image",
+    "app.ME74": "NEW FIELD INFO",
+    "app.ME75": "FIELDS REGISTER",
+    "app.ME76": "Type",
+    "app.ME77": "Remove",
+    "app.ME78": "Add",
+    "app.ME79": "Field already registered",
+    "app.ME80": "Entrys"
 }

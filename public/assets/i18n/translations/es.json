@@ -41,6 +41,8 @@
     "code.CO40": "Herramientas listadas correctamente",
     "code.CO41": "Herramienta actualizada exitosamente",
     "code.CO42": "Error actualizando herramienta",
+    "code.CO43": "Formulario registrado exitosamente",
+    "code.CO44": "Formulario actualizado exitosamente",
     "app.ME01": "Usuario",
     "app.ME02": "Contraseña",
     "app.ME03": "Acceder",
@@ -107,5 +109,18 @@
     "app.ME64": "Herramientas",
     "app.ME65": "Descripción",
     "app.ME66": "Nueva herramienta",
-    "app.ME67": "Modificar herramienta"
+    "app.ME67": "Modificar herramienta",
+    "app.ME68": "Nuevo formulario",
+    "app.ME69": "Modificar formulario",
+    "app.ME70": "Descripción del campo",
+    "app.ME71": "Texto y números",
+    "app.ME72": "Fecha",
+    "app.ME73": "Imagen",
+    "app.ME74": "DATOS DE NUEVO CAMPO",
+    "app.ME75": "CAMPOS REGISTRADOS",
+    "app.ME76": "Tipo",
+    "app.ME77": "Remover",
+    "app.ME78": "Agregar",
+    "app.ME79": "Campo ya registrado",
+    "app.ME80": "Entradas"
 }
