@@ -83,7 +83,7 @@ const Update = ({ search }) => {
     return (
         <Layout style={{ background: 'white' }}>
             <Row style={{ margin: 20 }}>
-                <Col span={8} style={{ display: 'flex', flex: 1, flexDirection: 'row', justifyContent: 'flex-start' }}>
+                <Col span={8}>
                     <Breadcrumb>
                         <Breadcrumb.Item>{t('app.ME23')}</Breadcrumb.Item>
                         <Breadcrumb.Item>
