@@ -4,10 +4,14 @@
   "description": "Almo Workspace App",
   "productName": "Almo Workspace",
   "author": "Arcángel Soluciones",
+  "copyright": "Copyright © 2021 Almoworkspace",
   "main": "public/electron.js",
   "homepage": "./",
   "build": {
     "appId": "com.aw.app",
+    "mac": {
+      "icon": "public/assets/images/icon.png"
+    },
     "win": {
       "icon": "public/assets/images/icon.png"
     },
