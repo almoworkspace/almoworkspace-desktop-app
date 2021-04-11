@@ -10,7 +10,7 @@
   "build": {
     "appId": "com.aw.app",
     "mac": {
-      "icon": "public/assets/images/icon.png"
+      "icon": "public/assets/images/logo512.png"
     },
     "win": {
       "icon": "public/assets/images/icon.png"
