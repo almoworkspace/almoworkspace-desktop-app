@@ -9,6 +9,7 @@ import { Logout } from '../../../actions/authActions';
 import { FindAll } from '../../../helpers/apis/Notification';
 import Notifier from "react-desktop-notification";
 import logo from '../../../assets/images/Logo-ALMO-PNG-Transparente.png';
+import notifyLogo from '../../../assets/images/logo192.png';
 
 const Navbar = () => {
     const socket = useContext(SocketContext);
@@ -23,7 +24,6 @@ const Navbar = () => {
     const [notifications, setNotifications] = useState(0);
 
     useEffect(() => {
-        // Notifier.start("Title", "Here is context", "http://localhost:3000/dashboard/orders", "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png");
         searchNotifications();
     }, []);
 
@@ -33,6 +33,7 @@ const Navbar = () => {
                 const response = await FindAll(token);
                 if (response.statusCode === 200) {
                     setNotifications(response.data.length);
+                    Notifier.start("Almo Workspace", "Posees una nueva notificación", "https://almoworkspace.com/dashboard/notifications", notifyLogo);
                 }
             }
         });
@@ -43,6 +44,14 @@ const Navbar = () => {
                 if (response.statusCode === 200) {
                     setNotifications(response.data.length);
                 }
+            }
+        });
+
+        socket.on("message_created", async data => {
+            const response = await FindAll(token);
+            if (response.statusCode === 200) {
+                setNotifications(response.data.length);
+                Notifier.start("Almo Workspace", "Posees una nueva notificación", "https://almoworkspace.com/dashboard/notifications", notifyLogo);
             }
         });
     }, []);
