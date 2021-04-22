@@ -41,8 +41,7 @@ const Orders = () => {
             if (result.statusCode === 200) {
                 openNotificationWithIcon('success');
                 setIsLoading(false);
-            } else {
-                console.log(result);
+            } else {                
                 setIsLoading(false);
             }
         }
@@ -96,13 +95,18 @@ const Orders = () => {
                         <Spin indicator={antIcon} size='large' />
                     </Col> :
                     <Col span={24}>
-                        <Table dataSource={data}>                           
+                        <Table dataSource={data}>
                             <Column title={t('app.ME39')} dataIndex="otNumber" key="otNumber" />
                             <Column
                                 title="Acción"
                                 key="action"
                                 render={(text, record) => (
-                                    <>                                       
+                                    <>
+                                        <Space size="small">
+                                            <Link to={`/dashboard/orders/${record.id}`}>
+                                                <Button type="text" style={{ color: '#2F9264' }}>{t('app.ME28')}</Button>
+                                            </Link>
+                                        </Space>
                                         <Space size="small" style={{ marginLeft: 10 }}>
                                             <Button onClick={() => { exportPdf(record.id) }} type="text" style={{ color: '#2F9264' }}>{t('app.ME58')}</Button>
                                         </Space>

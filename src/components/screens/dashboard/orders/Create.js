@@ -35,6 +35,7 @@ const Create = () => {
     const [materialsObs, setMaterialsObs] = useState('');
     const [generalObs, setGeneralObs] = useState('');
     const [generalPictures, setGeneralPictures] = useState('');
+    const [clientSignatureName, setClientSignatureName] = useState('');
     const [techName, setTechName] = useState('');
     const [techDatetime, setTechDatetime] = useState('');
     const [techSignaturePicture, setTechSignaturePicture] = useState(null);
@@ -91,6 +92,7 @@ const Create = () => {
             techName: techName,
             techDatetime: techDatetime,
             techSignaturePicture: techSignaturePicture === null ? '' : techSignaturePicture.path,
+            clientSignatureName: clientSignatureName,
             clientAproveDatetime: clientAproveDatetime,
             clientSignaturePicture: clientSignaturePicture === null ? '' : clientSignaturePicture.path
         };
@@ -401,11 +403,6 @@ const Create = () => {
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <DatePicker placeholder={t('app.ME54')} format="YYYY-MM-DD HH:mm:ss" showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={(e) => { setTechDatetime(e.format("YYYY-MM-DD HH:mm:ss").toString()) }} />
                                 </Space>
-                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Upload multiple={false} showUploadList={false} accept="image/*" action={(file) => { uploadFile(file, 'tech') }}>
-                                        <Button icon={<UploadOutlined />}>Firma</Button>
-                                    </Upload>
-                                </Space>
                             </Col>
                         </Row>
                         <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
@@ -417,6 +414,9 @@ const Create = () => {
                         </Row>
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
+                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                    <Input onChange={(e) => { setClientSignatureName(e.target.value) }} placeholder={t('app.ME41')} />
+                                </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <DatePicker placeholder={t('app.ME54')} format="YYYY-MM-DD HH:mm:ss" showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={(e) => { setClientAproveDatetime(e.format("YYYY-MM-DD HH:mm:ss").toString()) }} />
                                 </Space>

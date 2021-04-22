@@ -8,7 +8,23 @@ export const CreateOrder = async (token, object) => {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(object),
+        body: JSON.stringify(object)
+    })
+        .then(result => { return result.json(); })
+        .then(json => { return json; })
+        .catch(error => { return null; })
+    return response;
+}
+
+export const UpdateOrder = async (token, id, object) => {
+    const response = await fetch(`${APP_SETTINGS.API_URL}/orders/${id}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json, text/plain, */*',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(object)
     })
         .then(result => { return result.json(); })
         .then(json => { return json; })
@@ -24,7 +40,7 @@ export const ExportOrderToPDF = async (token, object) => {
             'Accept': 'application/json, text/plain, */*',
             'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(object),
+        body: JSON.stringify(object)
     })
         .then(result => { return result.json(); })
         .then(json => { return json; })
