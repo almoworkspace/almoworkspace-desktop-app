@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Breadcrumb, Layout, Row, Col, Button, Table, Space, Spin, Input, notification } from 'antd';
 import { PlusCircleOutlined, LoadingOutlined } from '@ant-design/icons';
 import { FindAll, FindAllMe, FindOne, ExportOrderToPDF } from '../../../../helpers/apis/Entry';
-import { DownloadFile } from '../../../../helpers/apis/Order';
+import { DownloadFileDinamic } from '../../../../helpers/apis/Order';
 
 const Forms = () => {
     const token = useSelector(state => state.auth.token);
@@ -68,7 +68,9 @@ const Forms = () => {
     }
 
     const downloadPdf = async (code) => {
-        await DownloadFile(token, code);
+        setIsLoading(true);
+        await DownloadFileDinamic(token, code);
+        setIsLoading(false);
     }
 
     return (

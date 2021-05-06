@@ -41,14 +41,16 @@ const Orders = () => {
             if (result.statusCode === 200) {
                 openNotificationWithIcon('success');
                 setIsLoading(false);
-            } else {                
+            } else {
                 setIsLoading(false);
             }
         }
     }
 
     const downloadPdf = async (code) => {
-        await DownloadFile(token, code);
+        setIsLoading(true);
+        const response = await DownloadFile(token, code);
+        setIsLoading(false);
     }
 
     const filterByText = (value) => {
@@ -111,7 +113,7 @@ const Orders = () => {
                                             <Button onClick={() => { exportPdf(record.id) }} type="text" style={{ color: '#2F9264' }}>{t('app.ME58')}</Button>
                                         </Space>
                                         <Space size="small">
-                                            <Button onClick={() => { downloadPdf(record.code) }} type="text" style={{ color: '#2F9264' }}>{t('app.ME60')}</Button>
+                                            <Button onClick={() => { downloadPdf(record.otNumber) }} type="text" style={{ color: '#2F9264' }}>{t('app.ME60')}</Button>
                                         </Space>
                                     </>
                                 )}

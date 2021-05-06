@@ -109,7 +109,7 @@ export const DownloadFile = async (token, code) => {
         }
     })
         .then(result => { return result.blob(); })
-        .then(blob => {
+        .then(blob => {             
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement('a');
             link.href = url;
@@ -117,6 +117,28 @@ export const DownloadFile = async (token, code) => {
             document.body.appendChild(link);
             link.click();
             link.parentNode.removeChild(link);
+        })
+        .catch(error => { return null; })
+    return response;
+}
+
+export const DownloadFileDinamic = async (token, code) => {
+    const response = await fetch(`${APP_SETTINGS.API_URL}/file/download/dinamic-${code}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(result => { return result.blob(); })
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `dinamic-${code}.pdf`);
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+            return true;
         })
         .catch(error => { return null; })
     return response;
