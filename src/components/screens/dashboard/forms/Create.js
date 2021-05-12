@@ -128,6 +128,7 @@ const Create = () => {
                                         <Option value="TEXTO">{t('app.ME71')}</Option>
                                         <Option value="FECHA">{t('app.ME72')}</Option>
                                         <Option value="IMAGEN">{t('app.ME73')}</Option>
+                                        <Option value="FIRMA">{t('app.ME86')}</Option>
                                     </Select>
                                 </Space>
                             </Col>

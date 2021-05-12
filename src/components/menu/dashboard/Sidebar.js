@@ -60,22 +60,34 @@ const Sidebar = () => {
                         </>
                         :
                         <>
-                            <Menu.ItemGroup key="g1" title={t("app.ME07")}>
-                                <Menu.Item key="1" icon={<FilePdfOutlined />}>
-                                    <Link to={'/dashboard/orders'}>
-                                        {t("app.ME08")}
+                            <Menu.ItemGroup key="g1" title={t("app.ME04")}>
+                                <Menu.Item key="1" icon={<ToolOutlined />}>
+                                    <Link to={'/dashboard/tools'}>
+                                        {t("app.ME64")}
                                     </Link>
                                 </Menu.Item>
                             </Menu.ItemGroup>
                             <Menu.ItemGroup key="g2" title={t("app.ME06")}>
                                 <Menu.Item key="2" icon={<FormOutlined />}>
+                                    <Link to={'/dashboard/forms'}>
+                                        {t("app.ME06")}
+                                    </Link>
+                                </Menu.Item>
+                                <Menu.Item key="3" icon={<FileAddOutlined />}>
                                     <Link to={'/dashboard/entrys'}>
                                         {t("app.ME80")}
                                     </Link>
                                 </Menu.Item>
                             </Menu.ItemGroup>
-                            <Menu.ItemGroup key="g3" title={t("app.ME09")}>
-                                <Menu.Item key="3" icon={<MessageOutlined />}>
+                            <Menu.ItemGroup key="g3" title={t("app.ME07")}>
+                                <Menu.Item key="4" icon={<FilePdfOutlined />}>
+                                    <Link to={'/dashboard/orders'}>
+                                        {t("app.ME08")}
+                                    </Link>
+                                </Menu.Item>
+                            </Menu.ItemGroup>
+                            <Menu.ItemGroup key="g4" title={t("app.ME09")}>
+                                <Menu.Item key="5" icon={<MessageOutlined />}>
                                     <Link to={'/dashboard/chat'}>
                                         {t("app.ME10")}
                                     </Link>

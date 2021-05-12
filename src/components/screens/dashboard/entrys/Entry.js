@@ -54,9 +54,9 @@ const Forms = () => {
     }
 
     const exportPdf = async (id) => {
+        setIsLoading(true);
         const response = await FindOne(token, id);
-        if (response.statusCode === 200) {
-            setIsLoading(true);
+        if (response.statusCode === 200) {           
             const result = await ExportOrderToPDF(token, response.data);
             if (result.statusCode === 200) {
                 openNotificationWithIcon('success');
@@ -69,8 +69,8 @@ const Forms = () => {
 
     const downloadPdf = async (code) => {
         setIsLoading(true);
-        await DownloadFileDinamic(token, code);
-        setIsLoading(false);
+        await DownloadFileDinamic(token, code);        
+        setIsLoading(false);        
     }
 
     return (
@@ -103,7 +103,7 @@ const Forms = () => {
                 </Col>
             </Row>
             <Row style={{ padding: 20 }}>
-                {data === null ?
+                {data === null || isLoading ?
                     <Col span={24} style={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
                         <Spin indicator={antIcon} size='large' />
                     </Col> :

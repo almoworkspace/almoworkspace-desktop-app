@@ -45,3 +45,18 @@ export const Update = async (token, id, object) => {
         .catch(error => { return null; })
     return response;
 }
+
+export const Delete = async (token, id) => {
+    const response = await fetch(`${APP_SETTINGS.API_URL}/users/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json, text/plain, */*',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(result => { return result.json(); })
+        .then(json => { return json; })
+        .catch(error => { return null; })
+    return response;
+}

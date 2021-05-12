@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Breadcrumb, Layout, Row, Col, Button, Table, Tag, Space, Spin, Input } from 'antd';
+import { Breadcrumb, Layout, Row, Col, Button, Table, Tag, Space, Spin, Input, Modal } from 'antd';
 import { PlusCircleOutlined, LoadingOutlined } from '@ant-design/icons';
-import { FindAll } from '../../../../helpers/apis/User';
+import { FindAll, Delete } from '../../../../helpers/apis/User';
 
 const Users = () => {
     const token = useSelector(state => state.auth.token);
     const { t } = useTranslation();
     const [data, setData] = useState(null);
     const [staticData, setStaticData] = useState(null);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [tmpId, setTmpId] = useState(null);
     const { Column } = Table;
     const { Search } = Input;
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -33,8 +35,29 @@ const Users = () => {
         }
     }
 
+    const deleteUser = async (id) => {
+        setData(null);
+        setStaticData(null);
+        setModalVisible(false);
+        const response = await Delete(token, id);
+        if (response.statusCode === 200) {
+            const responseData = await FindAll(token);
+            setData(responseData.data);
+            setStaticData(responseData.data);
+        }
+    }
+
     return (
         <Layout style={{ background: 'white' }}>
+            <Modal
+                title="Mensaje del sistema"
+                visible={modalVisible}
+                onOk={() => { deleteUser(tmpId) }}
+                onCancel={() => { setModalVisible(false) }}
+                okText={t('app.ME83')}
+                cancelText={t('app.ME84')}>
+                <p>{t('app.ME85')}</p>
+            </Modal>
             <Row style={{ margin: 20 }}>
                 <Col span={8}>
                     <Breadcrumb>
@@ -91,9 +114,17 @@ const Users = () => {
                                 title="Acción"
                                 key="action"
                                 render={(text, record) => (
-                                    <Space size="small">
-                                        <Link to={`/dashboard/users/${record.id}`}>{t('app.ME28')}</Link>
-                                    </Space>
+                                    <>
+                                        <Space size="small">
+                                            <Link to={`/dashboard/users/${record.id}`}>{t('app.ME28')}</Link>
+                                        </Space>
+                                        <Space size="small" style={{ marginLeft: 10 }}>
+                                            <Button onClick={() => {
+                                                setTmpId(record.id);
+                                                setModalVisible(true);
+                                            }} type="text" style={{ color: 'red' }}>{t('app.ME77')}</Button>
+                                        </Space>
+                                    </>
                                 )}
                             />
                         </Table>

@@ -1,9 +1,13 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Backend from 'i18next-xhr-backend';
+import I18nextBrowserLanguageDetector from 'i18next-browser-languagedetector';
+
+const Languages = ['es', 'en'];
 
 i18n
     .use(Backend)
+    .use(I18nextBrowserLanguageDetector)
     .use(initReactI18next)
     .init({
         lng: 'es',
@@ -17,6 +21,7 @@ i18n
         ns: ['translations'],
         defaultNS: 'translations',
         keySeparator: false,
+        whitelist: Languages,
         interpolation: {
             escapeValue: false,
             formatSeparator: ','

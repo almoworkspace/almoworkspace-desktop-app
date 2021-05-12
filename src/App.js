@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { Suspense } from 'react';
 import { store, persistor } from './Store';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';

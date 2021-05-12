@@ -25,13 +25,14 @@ const Create = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
     useEffect(() => {
-        const request = async () => {            
+        const request = async () => {
             const response = await FindAll(token);
+            console.log(response);
             if (response.statusCode === 200) {
                 setData(response.data);
                 setForm(response.data[0]);
-                setFields(JSON.parse(response.data[0].fields));
-                setFormValues(JSON.parse(response.data[0].fields));
+                setFields(response.data[0].fields);
+                setFormValues(response.data[0].fields);
             } else {
                 setData([]);
             }
@@ -74,8 +75,8 @@ const Create = () => {
     const changeForm = (e) => {
         const found = data.find(item => item.descrip === e);
         setForm(found);
-        setFields(JSON.parse(found.fields));
-        setFormValues(JSON.parse(found.fields));
+        setFields(found.fields);
+        setFormValues(found.fields);
     }
 
     const setFormValues = (form) => {
@@ -126,7 +127,14 @@ const Create = () => {
             <Row style={{ padding: 20 }}>
                 <Col span={24}>
                     <Card title={t('app.ME68')} headStyle={{ background: '#2F9264', color: 'white' }}>
-                        <Row style={{ marginBottom: 10 }}>
+                        <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
+                            <Col span={24}>
+                                <Space direction='vertical'>
+                                    <Title level={3}>{t('app.ME87')}</Title>
+                                </Space>
+                            </Col>
+                        </Row>
+                        <Row>
                             <Col span={24}>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <Select onChange={(e) => { changeForm(e) }} defaultValue={data.length > 0 && data[0].descrip} style={{ width: '100%' }}>
@@ -173,6 +181,14 @@ const Create = () => {
                                                         <Space key={index} direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                                             <Upload multiple={false} showUploadList={false} accept="image/*" action={(file) => { uploadFile(file, item.descrip) }}>
                                                                 <Button icon={<UploadOutlined />}>Imagen</Button>
+                                                            </Upload>
+                                                        </Space>
+                                                    );
+                                                case "FIRMA":
+                                                    return (
+                                                        <Space key={index} direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                                            <Upload multiple={false} showUploadList={false} accept="image/*" action={(file) => { uploadFile(file, item.descrip) }}>
+                                                                <Button icon={<UploadOutlined />}>Firma</Button>
                                                             </Upload>
                                                         </Space>
                                                     );

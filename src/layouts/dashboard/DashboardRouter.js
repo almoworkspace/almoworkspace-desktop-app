@@ -39,14 +39,20 @@ const DashboardRouter = ({ match: { url } }) => {
     } else {
         return (
             <Switch>
-                <Route path={`${url}`} exact component={ReadDashboard} />
+                <Route path={`${url}`} exact component={ReadDashboard} />               
                 <Route path={`${url}/orders`} exact component={ReadOrders} />
                 <Route path={`${url}/orders/create`} exact component={CreateOrders} />
                 <Route path={`${url}/orders/:id`} exact component={UpdateOrders} />
-                <Route path={`${url}/entrys`} exact component={ReadEntrys} />
-                <Route path={`${url}/entrys/create`} exact component={CreateEntrys} />
                 <Route path={`${url}/notifications`} exact component={ReadNotifications} />
                 <Route path={`${url}/chat`} exact component={ReadChat} />
+                <Route path={`${url}/tools`} exact component={ReadTools} />
+                <Route path={`${url}/tools/create`} exact component={CreateTools} />
+                <Route path={`${url}/tools/:id`} exact component={UpdateTools} />
+                <Route path={`${url}/forms`} exact component={ReadForms} />
+                <Route path={`${url}/forms/create`} exact component={CreateForms} />
+                <Route path={`${url}/forms/:id`} exact component={UpdateForms} />
+                <Route path={`${url}/entrys`} exact component={ReadEntrys} />
+                <Route path={`${url}/entrys/create`} exact component={CreateEntrys} />
                 <Redirect to="/dashboard" />
             </Switch>
         );

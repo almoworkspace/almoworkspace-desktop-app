@@ -17,6 +17,7 @@ const Update = ({ search }) => {
     const [fullname, setFullname] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
+    const [rol, setRol] = useState('');
     const [isSearch, setIsSearch] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const { Option } = Select;
@@ -32,6 +33,7 @@ const Update = ({ search }) => {
                 setPhone(response.data.Profile[0].phone);
                 setAddress(response.data.Profile[0].address);
                 setId(response.data.Profile[0].dni);
+                setRol(response.data.rol);
                 setIsSearch(false);
             } else {
                 setData(null);
@@ -54,6 +56,10 @@ const Update = ({ search }) => {
         setVerified(e);
     }
 
+    const handleChangeRol = (e) => {
+        setRol(e);
+    }
+
     const update = async () => {
         if (id === '' || fullname === '') {
             Modal.info({
@@ -66,7 +72,8 @@ const Update = ({ search }) => {
                 fullname: fullname,
                 phone: phone,
                 address: address,
-                verified: verified
+                verified: verified,
+                rol: rol
             };
             setIsLoading(true);
             const response = await UpdateUser(token, search, obj);
@@ -105,6 +112,11 @@ const Update = ({ search }) => {
                                 <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignContent: 'center', height: '70vh' }}>
                                     <Col span={12}>
                                         <Space direction='vertical'>
+                                            <Select defaultValue="EMPLOYEE" value={rol} onChange={(e) => { handleChangeRol(e) }}>
+                                                <Option value="ADMIN">{t('app.ME81')}</Option>
+                                                <Option value="EMPLOYEE">{t('app.ME82')}</Option>
+                                            </Select>
+                                            <Divider />
                                             <Select defaultValue={0} value={verified} onChange={(e) => { handleChange(e) }}>
                                                 <Option value={0}>{t('app.ME27')}</Option>
                                                 <Option value={1}>{t('app.ME26')}</Option>
