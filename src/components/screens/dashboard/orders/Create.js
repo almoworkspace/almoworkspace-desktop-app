@@ -16,6 +16,7 @@ const Create = () => {
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
     const [answerDate, setAnswerDate] = useState('');
+    const [otNumber, setOtNumber] = useState('');
     const [quotationNumber, setQuotationNumber] = useState('');
     const [clientName, setClientName] = useState('');
     const [setupDatetime, setSetupDatetime] = useState('');
@@ -70,6 +71,7 @@ const Create = () => {
             name: name,
             lastname: lastname,
             answerDate: answerDate,
+            otNumber: otNumber,
             quotationNumber: quotationNumber,
             clientName: clientName,
             setupDatetime: setupDatetime,
@@ -194,6 +196,9 @@ const Create = () => {
                         </Row>
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
+                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                    <Input onChange={(e) => { setOtNumber(e.target.value) }} placeholder={t('app.ME39')} />
+                                </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <Input onChange={(e) => { setQuotationNumber(e.target.value) }} placeholder={t('app.ME40')} />
                                 </Space>
