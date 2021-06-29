@@ -462,6 +462,11 @@ const Update = ({ search }) => {
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                         <DatePicker value={moment(techDatetime)} placeholder={t('app.ME54')} format="YYYY-MM-DD HH:mm:ss" showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={(e) => { e !== null && setTechDatetime(e.format("YYYY-MM-DD HH:mm:ss").toString()) }} />
                                     </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Upload multiple={false} showUploadList={false} accept="image/*" action={(file) => { uploadFile(file, 'tech') }}>
+                                            <Button icon={<UploadOutlined />}>Firma</Button>
+                                        </Upload>
+                                    </Space>
                                 </Col>
                             </Row>
                             <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>

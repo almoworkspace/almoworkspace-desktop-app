@@ -35,7 +35,7 @@ const Create = () => {
     const [materialsConclusions, setMaterialsConclusion] = useState('');
     const [materialsObs, setMaterialsObs] = useState('');
     const [generalObs, setGeneralObs] = useState('');
-    const [generalPictures, setGeneralPictures] = useState('');
+    const [generalPictures, setGeneralPictures] = useState([]);
     const [clientSignatureName, setClientSignatureName] = useState('');
     const [techName, setTechName] = useState('');
     const [techDatetime, setTechDatetime] = useState('');
@@ -67,6 +67,20 @@ const Create = () => {
     };
 
     const create = async () => {
+        let strPic = '';
+        if (generalPictures.length > 0) {
+            for (let index = 0; index <= generalPictures.length - 1; index++) {
+                const result = await UploadFile(token, generalPictures[index]);
+                if (result.statusCode === 200) {
+                    if (index === (generalPictures.length - 1)) {
+                        strPic = `${strPic}${result.data}`;
+                    } else {
+                        strPic = `${strPic}${result.data},`;
+                    }
+                }
+            }
+        }
+
         const obj = {
             name: name,
             lastname: lastname,
@@ -90,7 +104,7 @@ const Create = () => {
             materialsConclusions: materialsConclusions,
             materialsObs: materialsObs,
             generalObs: generalObs,
-            generalPictures: generalPictures === null ? '' : generalPictures,
+            generalPictures: strPic,
             techName: techName,
             techDatetime: techDatetime,
             techSignaturePicture: techSignaturePicture === null ? '' : techSignaturePicture.path,
@@ -131,18 +145,9 @@ const Create = () => {
                 }
                 break;
             case 'obs':
-                response = await UploadFile(token, file);
-                if (response.statusCode === 200) {
-                    if (generalPictures === '') {
-                        let temp = generalPictures;
-                        temp = `${temp}${response.data}`;
-                        setGeneralPictures(temp);
-                    } else {
-                        let temp = generalPictures;
-                        temp = `${temp},${response.data}`;
-                        setGeneralPictures(temp);
-                    }
-                }
+                let tmpArray = generalPictures;
+                tmpArray.push(file);
+                setGeneralPictures(tmpArray);
                 break;
             default:
                 response = await UploadFile(token, file);
@@ -407,6 +412,11 @@ const Create = () => {
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <DatePicker placeholder={t('app.ME54')} format="YYYY-MM-DD HH:mm:ss" showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={(e) => { setTechDatetime(e.format("YYYY-MM-DD HH:mm:ss").toString()) }} />
+                                </Space>
+                                <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                    <Upload multiple={false} showUploadList={false} accept="image/*" action={(file) => { uploadFile(file, 'tech') }}>
+                                        <Button icon={<UploadOutlined />}>Firma</Button>
+                                    </Upload>
                                 </Space>
                             </Col>
                         </Row>
