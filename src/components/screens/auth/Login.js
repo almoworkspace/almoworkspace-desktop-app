@@ -68,7 +68,7 @@ const Login = () => {
                         <Option value="es">Español</Option>
                         <Option value="en">English</Option>
                     </Select>
-                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.1.12</Text>
+                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.1.13</Text>
                     <Link to="/auth/policy"><Button type="text"><Text strong>{t("app.ME63")}</Text></Button></Link>
                 </Row>
             </Col>
