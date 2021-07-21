@@ -67,6 +67,7 @@ const Create = () => {
     };
 
     const create = async () => {
+        setIsLoading(true);
         let strPic = '';
         if (generalPictures.length > 0) {
             for (let index = 0; index <= generalPictures.length - 1; index++) {
@@ -112,10 +113,10 @@ const Create = () => {
             clientAproveDatetime: clientAproveDatetime,
             clientSignaturePicture: clientSignaturePicture === null ? '' : clientSignaturePicture.path
         };
-        setIsLoading(true);
         const response = await CreateOrder(token, obj);
         if (response.statusCode === 200) {
             openNotificationWithIcon('success');
+            setIsLoading(false);
             history.push('/dashboard/orders');
         } else {
             setIsLoading(false);
