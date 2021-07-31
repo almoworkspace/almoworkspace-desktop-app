@@ -48,6 +48,11 @@ export default function (state = initialState, action) {
             return {
                 ...state
             };
+        case AUTH_TYPES.CLEANUP_SPINNER:            
+            state.isLoading = false;            
+            return {
+                ...state
+            };
         case AUTH_TYPES.LOGOUT_FAILURE:
             return {
                 ...state,

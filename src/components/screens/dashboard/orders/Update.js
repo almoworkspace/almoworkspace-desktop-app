@@ -24,6 +24,7 @@ const Update = ({ search }) => {
     const [setupAddress, setSetupAddress] = useState('');
     const [email, setEmail] = useState('');
     const [hasWorks, setHasWorks] = useState('');
+    const [seriesNumber, setSeriesNumber] = useState('');
     const [taskObsOne, setTaskObsOne] = useState('');
     const [startTime, setStartTime] = useState('');
     const [endTime, setEndTime] = useState('');
@@ -37,6 +38,21 @@ const Update = ({ search }) => {
     const [materialsObs, setMaterialsObs] = useState('');
     const [generalObs, setGeneralObs] = useState('');
     const [generalPictures, setGeneralPictures] = useState('');
+    const [generalPicturesTwo, setGeneralPicturesTwo] = useState('');
+    const [generalPicturesThree, setGeneralPicturesThree] = useState('');
+    const [generalPicturesFour, setGeneralPicturesFour] = useState('');
+    const [typeTruckOne, setTypeTruckOne] = useState('');
+    const [modelTruckOne, setModelTruckOne] = useState('');
+    const [patentTruckOne, setPatentTruckOne] = useState('');
+    const [typeTruckTwo, setTypeTruckTwo] = useState('');
+    const [modelTruckTwo, setModelTruckTwo] = useState('');
+    const [patentTruckTwo, setPatentTruckTwo] = useState('');
+    const [typeTruckThree, setTypeTruckThree] = useState('');
+    const [modelTruckThree, setModelTruckThree] = useState('');
+    const [patentTruckThree, setPatentTruckThree] = useState('');
+    const [typeTruckFour, setTypeTruckFour] = useState('');
+    const [modelTruckFour, setModelTruckFour] = useState('');
+    const [patentTruckFour, setPatentTruckFour] = useState('');
     const [clientSignatureName, setClientSignatureName] = useState('');
     const [techName, setTechName] = useState('');
     const [techDatetime, setTechDatetime] = useState('');
@@ -73,6 +89,7 @@ const Update = ({ search }) => {
                 setSetupAddress(response.data.setupAddress);
                 setEmail(response.data.email);
                 setHasWorks(response.data.hasWorks);
+                setSeriesNumber(response.data.seriesNumber);
                 setTaskObsOne(response.data.taskObsOne);
                 setStartTime(response.data.startTime);
                 setEndTime(response.data.endTime);
@@ -86,6 +103,21 @@ const Update = ({ search }) => {
                 setMaterialsObs(response.data.materialsObs);
                 setGeneralObs(response.data.generalObs);
                 setGeneralPictures(response.data.generalPictures);
+                setGeneralPicturesTwo(response.data.generalPicturesTwo);
+                setGeneralPicturesThree(response.data.generalPicturesThree);
+                setGeneralPicturesFour(response.data.generalPicturesFour);
+                setTypeTruckOne(response.data.typeTruckOne);
+                setModelTruckOne(response.data.modelTruckOne);
+                setPatentTruckOne(response.data.patentTruckOne);
+                setTypeTruckTwo(response.data.typeTruckTwo);
+                setModelTruckTwo(response.data.modelTruckTwo);
+                setPatentTruckTwo(response.data.patentTruckTwo);
+                setTypeTruckThree(response.data.typeTruckThree);
+                setModelTruckThree(response.data.modelTruckThree);
+                setPatentTruckThree(response.data.patentTruckThree);
+                setTypeTruckFour(response.data.typeTruckFour);
+                setModelTruckFour(response.data.modelTruckFour);
+                setPatentTruckFour(response.data.patentTruckFour);
                 setClientSignatureName(response.data.clientSignatureName);
                 setTechName(response.data.techName);
                 setTechDatetime(response.data.techDatetime);
@@ -116,6 +148,7 @@ const Update = ({ search }) => {
             setupAddress: setupAddress,
             email: email,
             hasWorks: hasWorks,
+            seriesNumber: seriesNumber,
             taskObsOne: taskObsOne,
             startTime: startTime,
             endTime: endTime,
@@ -129,6 +162,21 @@ const Update = ({ search }) => {
             materialsObs: materialsObs,
             generalObs: generalObs,
             generalPictures: generalPictures === null ? '' : generalPictures,
+            generalPicturesTwo: generalPicturesTwo === null ? '' : generalPicturesTwo,
+            generalPicturesThree: generalPicturesThree === null ? '' : generalPicturesThree,
+            generalPicturesFour: generalPicturesFour === null ? '' : generalPicturesFour,
+            typeTruckOne: typeTruckOne,
+            modelTruckOne: modelTruckOne,
+            patentTruckOne: patentTruckOne,
+            typeTruckTwo: typeTruckTwo,
+            modelTruckTwo: modelTruckTwo,
+            patentTruckTwo: patentTruckTwo,
+            typeTruckThree: typeTruckThree,
+            modelTruckThree: modelTruckThree,
+            patentTruckThree: patentTruckThree,
+            typeTruckFour: typeTruckFour,
+            modelTruckFour: modelTruckFour,
+            patentTruckFour: patentTruckFour,
             techName: techName,
             techDatetime: techDatetime,
             techSignaturePicture: techSignaturePicture === null ? '' : techSignaturePicture.path,
@@ -182,6 +230,48 @@ const Update = ({ search }) => {
                     }
                 }
                 break;
+            case 'obsTwo':
+                response = await UploadFile(token, file);
+                if (response.statusCode === 200) {
+                    if (generalPicturesTwo === '') {
+                        let temp = generalPicturesTwo;
+                        temp = `${temp}${response.data}`;
+                        setGeneralPicturesTwo(temp);
+                    } else {
+                        let temp = generalPicturesTwo;
+                        temp = `${temp},${response.data}`;
+                        setGeneralPicturesTwo(temp);
+                    }
+                }
+                break;
+            case 'obsThree':
+                response = await UploadFile(token, file);
+                if (response.statusCode === 200) {
+                    if (generalPicturesThree === '') {
+                        let temp = generalPicturesThree;
+                        temp = `${temp}${response.data}`;
+                        setGeneralPicturesThree(temp);
+                    } else {
+                        let temp = generalPicturesThree;
+                        temp = `${temp},${response.data}`;
+                        setGeneralPicturesThree(temp);
+                    }
+                }
+                break;
+            case 'obsFour':
+                response = await UploadFile(token, file);
+                if (response.statusCode === 200) {
+                    if (generalPicturesFour === '') {
+                        let temp = generalPicturesFour;
+                        temp = `${temp}${response.data}`;
+                        setGeneralPicturesFour(temp);
+                    } else {
+                        let temp = generalPicturesFour;
+                        temp = `${temp},${response.data}`;
+                        setGeneralPicturesFour(temp);
+                    }
+                }
+                break;
             default:
                 response = await UploadFile(token, file);
                 if (response.statusCode === 200) {
@@ -224,6 +314,13 @@ const Update = ({ search }) => {
                     {
                         data &&
                         <Card title={t('app.ME33')} headStyle={{ background: '#2F9264', color: 'white' }}>
+                            <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', marginBottom: 30 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical'>
+                                        <Title level={3}>CREADOR OT</Title>
+                                    </Space>
+                                </Col>
+                            </Row>
                             <Row style={{ marginBottom: 10 }}>
                                 <Col span={24}>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
@@ -231,9 +328,6 @@ const Update = ({ search }) => {
                                     </Space>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                         <Input onChange={(e) => { setName(e.target.value) }} value={name} placeholder={t('app.ME37')} />
-                                    </Space>
-                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                        <DatePicker placeholder={t('app.ME38')} format="YYYY-MM-DD HH:mm:ss" showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }} onChange={(e) => { e !== null && setAnswerDate(e.format("YYYY-MM-DD HH:mm:ss").toString()) }} value={moment(answerDate)} />
                                     </Space>
                                 </Col>
                             </Row>
@@ -269,7 +363,7 @@ const Update = ({ search }) => {
                             <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
                                 <Col span={24}>
                                     <Space direction='vertical'>
-                                        <Title level={3}>TAREAS</Title>
+                                        <Title level={3}>TAREAS A REALIZAR</Title>
                                     </Space>
                                 </Col>
                             </Row>
@@ -280,6 +374,9 @@ const Update = ({ search }) => {
                                     </Space>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                         <TextArea value={taskObsOne} rows={3} onChange={(e) => { setTaskObsOne(e.target.value) }} placeholder={t('app.ME46')} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={seriesNumber} onChange={(e) => { setSeriesNumber(e.target.value) }} placeholder={t('app.ME88')} />
                                     </Space>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                         <TimePicker value={moment(startTime, 'HH:mm:ss')} placeholder={t('app.ME55')} onChange={(e) => { e !== null && setStartTime(e.format("HH:mm:ss").toString()) }} />
@@ -431,19 +528,93 @@ const Update = ({ search }) => {
                             <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
                                 <Col span={24}>
                                     <Space direction='vertical'>
-                                        <Title level={3}>OBSERVACIONES GENERALES / RECOMENDACIONES</Title>
+                                        <Title level={3}>REGISTRO FOTOGRÁFICO VEHÍCULOS / MAQUINARIAS / CAMIÓN / OTRO</Title>
                                     </Space>
                                 </Col>
                             </Row>
                             <Row style={{ marginBottom: 10 }}>
                                 <Col span={24}>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                        <TextArea rows={3} value={generalObs} onChange={(e) => { setGeneralObs(e.target.value) }} placeholder={t('app.ME52')} />
+                                        <Upload multiple={false} showUploadList={true} accept="image/*" action={(file) => { uploadFile(file, 'obs') }}>
+                                            <Button icon={<UploadOutlined />}>Registro fotográfico vehículo Nro 1</Button>
+                                        </Upload>
                                     </Space>
                                     <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                        <Upload multiple={false} showUploadList={true} accept="image/*" action={(file) => { uploadFile(file, 'obs') }}>
-                                            <Button icon={<UploadOutlined />}>Fotos vehículos</Button>
+                                        <Upload multiple={false} showUploadList={true} accept="image/*" action={(file) => { uploadFile(file, 'obsTwo') }}>
+                                            <Button icon={<UploadOutlined />}>Registro fotográfico vehículo Nro 2</Button>
                                         </Upload>
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Upload multiple={false} showUploadList={true} accept="image/*" action={(file) => { uploadFile(file, 'obsThree') }}>
+                                            <Button icon={<UploadOutlined />}>Registro fotográfico vehículo Nro 3</Button>
+                                        </Upload>
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Upload multiple={false} showUploadList={true} accept="image/*" action={(file) => { uploadFile(file, 'obsFour') }}>
+                                            <Button icon={<UploadOutlined />}>Registro fotográfico vehículo Nro 4</Button>
+                                        </Upload>
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <TextArea rows={3} value={generalObs} onChange={(e) => { setGeneralObs(e.target.value) }} placeholder={t('app.ME52')} />
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical'>
+                                        <Title level={3}>INFORMACIÓN DE VEHÍCULOS INSTALADOS</Title>
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginBottom: 10 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={typeTruckOne} onChange={(e) => { setTypeTruckOne(e.target.value) }} placeholder={`${t('app.ME89')} 1`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={modelTruckOne} onChange={(e) => { setModelTruckOne(e.target.value) }} placeholder={`${t('app.ME90')} 1`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={patentTruckOne} onChange={(e) => { setPatentTruckOne(e.target.value) }} placeholder={`${t('app.ME91')} 1`} />
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginBottom: 10 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={typeTruckTwo} onChange={(e) => { setTypeTruckTwo(e.target.value) }} placeholder={`${t('app.ME89')} 2`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={modelTruckTwo} onChange={(e) => { setModelTruckTwo(e.target.value) }} placeholder={`${t('app.ME90')} 2`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={patentTruckTwo} onChange={(e) => { setPatentTruckTwo(e.target.value) }} placeholder={`${t('app.ME91')} 2`} />
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginBottom: 10 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={typeTruckThree} onChange={(e) => { setTypeTruckThree(e.target.value) }} placeholder={`${t('app.ME89')} 3`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={modelTruckThree} onChange={(e) => { setModelTruckThree(e.target.value) }} placeholder={`${t('app.ME90')} 3`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={patentTruckThree} onChange={(e) => { setPatentTruckThree(e.target.value) }} placeholder={`${t('app.ME91')} 3`} />
+                                    </Space>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginBottom: 10 }}>
+                                <Col span={24}>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={typeTruckFour} onChange={(e) => { setTypeTruckFour(e.target.value) }} placeholder={`${t('app.ME89')} 4`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={modelTruckFour} onChange={(e) => { setModelTruckFour(e.target.value) }} placeholder={`${t('app.ME90')} 4`} />
+                                    </Space>
+                                    <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
+                                        <Input value={patentTruckTwo} onChange={(e) => { setPatentTruckFour(e.target.value) }} placeholder={`${t('app.ME91')} 4`} />
                                     </Space>
                                 </Col>
                             </Row>

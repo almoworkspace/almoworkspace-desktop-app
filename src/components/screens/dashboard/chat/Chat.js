@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef, useContext, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +27,24 @@ const Chat = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const bottomList = useRef();
 
+    const refreshChat = useCallback(async (data) => {
+        console.log(data);
+        if (data.to === me || data.from === me) {
+            const response = await FindAllMe(token, me);
+            if (response.statusCode === 200) {
+                setMessages(response.data);
+            } else {
+                setMessages([]);
+            }
+            /// If chat selected
+            if (chat !== null) {
+                if ((data.to === me && data.from === chat.id) || (data.to === chat.id && data.from === me)) {
+                    await searchChat(chat.id, chat.user);
+                }
+            }
+        }
+    }, []);
+
     useEffect(() => {
         const request = async () => {
             const response = await FindAll(token);
@@ -49,28 +67,11 @@ const Chat = () => {
     }, []);
 
     useEffect(() => {
-        socket.on("message_created", async data => {
-            if (data.to === me || data.from === me) {
-                const response = await FindAllMe(token, me);
-                if (response.statusCode === 200) {
-                    setMessages(response.data);
-                } else {
-                    setMessages([]);
-                }
-               
-                setTimeout(() => {
-                    
-                }, 1000);
+        socket.on("message_created", refreshChat);
 
-                console.log(chat);
-                /// If chat selected
-                if (chat !== null) {
-                    if ((data.to === me && data.from === chat.id) || (data.to === chat.id && data.from === me)) {
-                        await searchChat(chat.id, chat.user);
-                    }
-                }
-            }
-        });
+        return () => {
+            socket.off("message_created", refreshChat);
+        }
     }, []);
 
     const filterByText = (value) => {
@@ -87,7 +88,7 @@ const Chat = () => {
         const response = await FindOne(token, id, me);
         if (response.statusCode === 200) {
             setChat({ id: id, user: username, chat: response.data });
-            scrollToBottom();           
+            scrollToBottom();
             await Update(token, { to: id, from: me });
             const responses = await FindAllMe(token, me);
             if (responses.statusCode === 200) {
@@ -114,7 +115,7 @@ const Chat = () => {
             }
             setIsLoading(true);
             const response = await CreateMessage(token, obj);
-            if (response.statusCode === 200) {               
+            if (response.statusCode === 200) {
                 const responses = await FindOne(token, chat.id, me);
                 if (responses.statusCode === 200) {
                     setChat({ id: chat.id, user: chat.user, chat: responses.data });

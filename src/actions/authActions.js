@@ -42,3 +42,7 @@ export const Logout = (token) => async dispatch => {
 export const CleanUp = () => async dispatch => {
     dispatch({ type: AUTH_TYPES.CLEANUP })
 }
+
+export const CleanUpSpinner = () => async dispatch => {
+    dispatch({ type: AUTH_TYPES.CLEANUP_SPINNER })
+}

@@ -18,7 +18,7 @@ const Orders = () => {
 
     useEffect(() => {
         const request = async () => {
-            const response = await FindAll(token);
+            const response = await FindAll(token);            
             setData(response.data);
             setStaticData(response.data);
         };
@@ -36,14 +36,14 @@ const Orders = () => {
     const exportPdf = async (id) => {
         const response = await FindOne(token, id);
         if (response.statusCode === 200) {
-            setIsLoading(true);
+            setIsLoading(true);           
             const result = await ExportOrderToPDF(token, response.data);
             if (result.statusCode === 200) {
                 openNotificationWithIcon('success');
                 setIsLoading(false);
             } else {
                 setIsLoading(false);
-            }
+            }            
         }
     }
 

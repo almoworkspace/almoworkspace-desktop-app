@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { LoadingOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { SocketContext } from '../../../context/Socket';
-import { Logout } from '../../../actions/authActions';
+import { Logout, CleanUpSpinner } from '../../../actions/authActions';
 import { FindAll } from '../../../helpers/apis/Notification';
 import Notifier from "react-desktop-notification";
 import logo from '../../../assets/images/Logo-ALMO-PNG-Transparente.png';
@@ -24,6 +24,7 @@ const Navbar = () => {
     const [notifications, setNotifications] = useState(0);
 
     useEffect(() => {
+        dispatch(CleanUpSpinner());
         searchNotifications();
     }, []);
 
@@ -81,7 +82,7 @@ const Navbar = () => {
     return (
         <PageHeader style={{ border: '1px solid rgb(235, 237, 240)', background: 'white', alignContent: 'center', paddingTop: 10, paddingBottom: 10, paddingLeft: 30, paddingRight: 30 }} avatar={{ src: logo }} title='Almo Workspace' extra={[
             <>
-                { languaje === 'es' ? `Cambiar a ingles` : `Switch to spanish`}: <Switch size="small" checked={languaje === 'es' ? false : true} onChange={toggleLanguaje} />
+                {languaje === 'es' ? `Cambiar a ingles` : `Switch to spanish`}: <Switch size="small" checked={languaje === 'es' ? false : true} onChange={toggleLanguaje} />
             </>,
             <Badge count={notifications}>
                 <Tooltip title={t("app.ME12")}>
