@@ -363,7 +363,7 @@ const Update = ({ search }) => {
                             <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
                                 <Col span={24}>
                                     <Space direction='vertical'>
-                                        <Title level={3}>TAREAS A REALIZAR</Title>
+                                        <Title level={3}>TAREAS A REALIZAR (Completar por ingeniero o técnico respectivo)</Title>
                                     </Space>
                                 </Col>
                             </Row>

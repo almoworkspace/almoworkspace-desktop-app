@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Breadcrumb, Row, Col, Layout, Card, Input, Button, Select, notification, Spin, Space, Typography, DatePicker, TimePicker, Upload } from 'antd';
 import { LoadingOutlined, UploadOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import { CreateOrder, UploadFile } from '../../../../helpers/apis/Order';
+import { CreateOrder, UploadFile, FindLast } from '../../../../helpers/apis/Order';
 import { FindAll } from '../../../../helpers/apis/Tool';
 import MessageHandler from '../../../component/MessageHandler';
 
@@ -70,6 +70,19 @@ const Create = () => {
             const response = await FindAll(token);
             if (response.statusCode === 200) {
                 setTools(response.data);
+            }
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            const response = await FindLast(token);
+            if (response.statusCode === 200) {
+                let tmpNro = response.data.otNumber;
+                tmpNro = tmpNro + 1;
+                setOtNumber(tmpNro.toString());
+            } else {
+                setOtNumber('1');
             }
         })();
     }, []);
@@ -298,7 +311,7 @@ const Create = () => {
                         <Row style={{ marginBottom: 10 }}>
                             <Col span={24}>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
-                                    <Input onChange={(e) => { setOtNumber(e.target.value) }} placeholder={t('app.ME39')} />
+                                    <Input value={otNumber} placeholder={t('app.ME39')} />
                                 </Space>
                                 <Space direction='vertical' style={{ width: '100%', marginBottom: 10 }}>
                                     <Input onChange={(e) => { setQuotationNumber(e.target.value) }} placeholder={t('app.ME40')} />
@@ -320,7 +333,7 @@ const Create = () => {
                         <Row style={{ flex: 1, flexDirection: 'column', justifyContent: 'center', alignContent: 'center', margin: 30 }}>
                             <Col span={24}>
                                 <Space direction='vertical'>
-                                    <Title level={3}>TAREAS A REALIZAR</Title>
+                                    <Title level={3}>TAREAS A REALIZAR (Completar por ingeniero o técnico respectivo)</Title>
                                 </Space>
                             </Col>
                         </Row>
