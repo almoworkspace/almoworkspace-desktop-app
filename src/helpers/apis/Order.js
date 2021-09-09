@@ -78,6 +78,21 @@ export const FindOne = async (token, id) => {
     return response;
 }
 
+export const FindLast = async (token) => {
+    const response = await fetch(`${APP_SETTINGS.API_URL}/orders/last/order`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': 'application/json, text/plain, */*',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(result => { return result.json(); })
+        .then(json => { return json; })
+        .catch(error => { return null; })
+    return response;
+}
+
 export const UploadFile = async (token, file) => {
     var formData = new FormData();
 
