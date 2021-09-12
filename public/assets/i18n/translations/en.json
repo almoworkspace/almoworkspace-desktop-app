@@ -43,6 +43,8 @@
     "code.CO42": "Error updating tool",
     "code.CO43": "Form successfully registered",
     "code.CO44": "Form updated successfully",
+    "code.CO49": "Order updated successfully",
+    "code.CO50": "Error updating order",
     "app.ME01": "Username",
     "app.ME02": "Password",
     "app.ME03": "Log in",
@@ -122,5 +124,16 @@
     "app.ME77": "Remove",
     "app.ME78": "Add",
     "app.ME79": "Field already registered",
-    "app.ME80": "Entrys"
+    "app.ME80": "Entrys",
+    "app.ME81": "Administrator",
+    "app.ME82": "Tech",
+    "app.ME83": "Yes",
+    "app.ME84": "No",
+    "app.ME85": "Are you sure you want to delete the user?",
+    "app.ME86": "Signature",
+    "app.ME87": "SELECT REGISTER FORM",
+    "app.ME88": "Radios serial number",
+    "app.ME89": "Vehicle type",
+    "app.ME90": "Vehicle model",
+    "app.ME91": "Vehicle patent"
 }

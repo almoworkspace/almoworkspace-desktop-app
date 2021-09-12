@@ -23,7 +23,7 @@ const Dashboard = () => {
             </Row>
             <Row style={{ padding: 20 }}>
                 <Col span={24} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', alignContent: 'center', alignItems: 'center' }}>
-                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.2.1</Text>
+                    <Text strong style={{ marginTop: 10 }}>Almo Workspace © 2021. V1.2.2</Text>
                 </Col>
             </Row>
         </Layout>
